@@ -1,1 +1,36 @@
+(ns my-project.core
+  (:require [clojure.test :refer :all]))
+
+;; 1.
+(defn even-doubled
+  "Возвращает чётные числа из списка, умноженные на 2"
+  [nums]
+  (map #(* 2 %) (filter even? nums)))
+
+;; 2. Функция для композиции
+(defn my-compose
+  "Создаёт композицию переданных функций"
+  [& funcs]
+  (fn [arg]
+    (reduce (fn [res f] (f res)) arg funcs)))
+
+;; Тесты
+(deftest test-functions
+  (testing "Проверка even-doubled"
+    (is (= (even-doubled [1 2 3 4 5 6]) [4 8 12]))
+    (is (= (even-doubled [1 3 5]) [])))
+  (testing "Проверка my-compose"
+    (let [add-one #(+ 1 %)
+          square #(* % %)
+          composed (my-compose square add-one)]
+      (is (= (composed 3) 16))
+      (is (= (composed 0) 1)))))
+
+;;
+(defn -main []
+  (println "Результаты even-doubled:" (even-doubled [1 2 3 4 5 6]))
+  (run-tests))
+
+;; Запуск программы
+(-main)
 
