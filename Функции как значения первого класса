@@ -1,0 +1,12 @@
+(defn squares [nums]
+  (map #(* % %) nums))
+
+(println "Квадраты чисел:" (squares [1 2 3 4 5]))  ;; => (1 4 9 16 25)
+
+
+(defn multiplier [factor]
+  (fn [x] (* x factor)))
+
+(def multiply-by-3 (multiplier 3))
+
+(println "Умножение на 3:" (map multiply-by-3 [1 2 3 4 5]))  ;; => (3 6 9 12 15)
