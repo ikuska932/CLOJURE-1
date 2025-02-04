@@ -1,1 +1,18 @@
+(ns example.core
+  (:require [clojure.spec.alpha :as s]))
+
+(defn process-even-numbers [nums]
+  (map #(* % 2) (filter even? nums)))
+
+(s/def ::username (s/and string? #(re-matches #"\w+" %)))
+(s/def ::age (s/and int? #(>= % 18)))
+(s/def ::user (s/keys :req-un [::username ::age]))
+
+(defn validate-user [user-data]
+  (if (s/valid? ::user user-data) :valid (s/explain-str ::user user-data)))
+
+;; Примеры:
+(println (process-even-numbers [1 2 3 4 5 6]))
+(println (validate-user {:username "John_Doe" :age 25}))
+(println (validate-user {:username "John@Doe" :age 16}))
 
