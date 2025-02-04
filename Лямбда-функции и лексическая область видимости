@@ -1,0 +1,12 @@
+(def strings ["hello" "world" "Clojure"])
+
+(def lengths (map count strings))
+(println "Длины строк:" lengths)  ;; => (5 5 7)
+
+(defn prefixer [prefix]
+  (fn [s] (str prefix s)))
+
+(def add-hello (prefixer "Hello, "))
+
+(def prefixed-strings (map add-hello strings))
+(println "С префиксом:" prefixed-strings)  ;; => ("Hello, hello" "Hello, world" "Hello, Clojure")
