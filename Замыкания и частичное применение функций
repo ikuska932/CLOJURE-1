@@ -1,0 +1,16 @@
+(defn powers-of [exponent]
+  (iterate #(* % exponent) 1))
+
+(defn nth-power-of [exponent]
+  (partial nth (powers-of exponent)))
+
+(println "5^2 =" ((nth-power-of 5) 2)) ;; => 25
+
+
+(defn divisible-by? [divisor]
+  (fn [num] (zero? (mod num divisor))))
+
+(def divisible-by-3? (divisible-by? 3))
+
+(println "Делится ли 9 на 3?" (divisible-by-3? 9)) ;; => true
+(println "Делится ли 10 на 3?" (divisible-by-3? 10)) ;; => false
