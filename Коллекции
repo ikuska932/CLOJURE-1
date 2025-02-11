@@ -1,0 +1,16 @@
+(defn sum-list [nums]
+  (reduce + nums))
+
+(println "Сумма списка:" (sum-list [1 2 3 4 5])) ;; => 15
+
+
+(defn unique-values [vec1 vec2]
+  (set (concat vec1 vec2)))
+
+(println "Уникальные значения:" (unique-values [1 2 3] [3 4 5])) ;; => #{1 2 3 4 5}
+
+
+(defn string-lengths [strings]
+  (map count strings))
+
+(println "Длины строк:" (string-lengths ["hello" "world" "Clojure"])) ;; => (5 5 7)
