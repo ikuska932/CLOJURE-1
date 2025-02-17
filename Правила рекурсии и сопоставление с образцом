@@ -1,0 +1,22 @@
+1. Функция для вычисления суммы чётных чисел в списке с использованием рекурсии
+(defn sum-even [nums]
+  (if (empty? nums)
+    0
+    (+ (if (even? (first nums)) (first nums) 0)
+       (sum-even (rest nums)))))
+
+(println "Сумма чётных чисел:" (sum-even [1 2 3 4 5 6 7 8 9 10])) ;; => 30
+
+2. Использование core.match для обработки вложенных карт 
+(ns example
+  (:require [clojure.core.match :refer [match]]))
+
+(defn process-map [data]
+  (match data
+    {:user {:name n :age a}} (str "Имя: " n ", возраст: " a)
+    {:error msg} (str "Ошибка: " msg)
+    _ "Неизвестно"))
+
+(println (process-map {:user {:name "Алексей" :age 30}})) ;; "Имя: Алексей, возраст: 30"
+(println (process-map {:error "Доступ запрещён"})) ;; "Ошибка: Доступ запрещён"
+(println (process-map {:unknown "?"})) ;; "Неизвестно"
